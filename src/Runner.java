@@ -22,9 +22,11 @@ public class Runner {
             parseJSON(response, movies);
         }
 
+        System.out.println("Trending movies: ");
+
         for (Movie movie : movies)
         {
-            System.out.println(movie.getID() + " " + movie.getTitle() + " " + movie.getPosterPath());
+            System.out.println(movie.getID() + " " + movie.getTitle() + " " + movie.getPosterPath() + " " + movie.isAdult());
         }
     }
 
@@ -53,9 +55,11 @@ public class Runner {
             String movieTitle = movieObj.getString("title");
             int movieID = movieObj.getInt("id");
             String posterPath = movieObj.getString("poster_path");
+            Boolean isAdult = movieObj.getBoolean("adult");
+
             String fullPosterPath = "https://image.tmdb.org/t/p/w500" + posterPath;
 
-            Movie movie = new Movie(movieTitle, movieID, fullPosterPath);
+            Movie movie = new Movie(movieTitle, movieID, fullPosterPath, isAdult);
             movies.add(movie);
         }
     }
